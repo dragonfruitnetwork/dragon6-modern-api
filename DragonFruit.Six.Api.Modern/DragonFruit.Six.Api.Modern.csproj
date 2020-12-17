@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <Title>Dragon6 Modern API</Title>
+        <Authors>DragonFruit Network</Authors>
+        <Description>Dragon6 Modern Stats API</Description>
+        <Copyright>Copyright DragonFruit Network (c) 2020</Copyright>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryType>Git</RepositoryType>
+        <PackageId>Dragon6.API.Modern</PackageId>
+        <PackageTags>r6stats, r6api, r6, rainbowsix, dragon6, modern</PackageTags>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RepositoryUrl>https://github.com/dragonfruitnetwork/dragon6-modern-api</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/dragonfruitnetwork/dragon6-modern-api</PackageProjectUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\src\icon.png">
+            <Pack>true</Pack>
+            <PackagePath>.</PackagePath>
+        </None>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Dragon6.API" Version="2020.1217.25" />
+    </ItemGroup>
+
+</Project>
