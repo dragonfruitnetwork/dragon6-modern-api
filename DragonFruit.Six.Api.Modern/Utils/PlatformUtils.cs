@@ -8,6 +8,9 @@ namespace DragonFruit.Six.Api.Modern.Utils
 {
     internal static class PlatformUtils
     {
+        /// <summary>
+        /// Converts a <see cref="Platform"/> enum to its modern string equivalent.
+        /// </summary>
         public static string ModernName(this Platform platform) => platform switch
         {
             Platform.PC => "PC",
