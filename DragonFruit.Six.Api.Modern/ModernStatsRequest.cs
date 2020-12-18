@@ -14,6 +14,7 @@ namespace DragonFruit.Six.Api.Modern
     public abstract class ModernStatsRequest : UbiApiRequest
     {
         private const string DateTimeFormat = "yyyyMMdd";
+        private const int DefaultStartWindow = 14;
 
         private DateTimeOffset? _startDate;
         private DateTimeOffset? _endDate;
@@ -65,7 +66,7 @@ namespace DragonFruit.Six.Api.Modern
         /// <exception cref="ArgumentOutOfRangeException">The date provided was more than 120 days ago</exception>
         public DateTimeOffset StartDate
         {
-            get => _startDate ??= DateTimeOffset.Now.AddDays(-7);
+            get => _startDate ??= DateTimeOffset.Now.AddDays(-DefaultStartWindow);
             set
             {
                 if (DateTimeOffset.UtcNow.Date.AddDays(-120) > value.Date)
