@@ -17,9 +17,7 @@ namespace DragonFruit.Six.Api.Modern.Extensions
 {
     public static class ModernOperatorStatsExtensions
     {
-        public static IReadOnlyDictionary<PlaylistType, ModernOperatorStatsContainer> GetModernOperatorStatsFor<T>(this T client, AccountInfo account, PlaylistType playlistType = PlaylistType.All,
-                                                                                                                   OperatorType operatorType = OperatorType.Independent,
-                                                                                                                   DateTimeOffset? startDate = null, DateTimeOffset? endDate = null)
+        public static IReadOnlyDictionary<PlaylistType, ModernOperatorStatsContainer> GetModernOperatorStatsFor<T>(this T client, AccountInfo account, PlaylistType playlistType = PlaylistType.All, OperatorType operatorType = OperatorType.Independent, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null)
             where T : Dragon6Client
         {
             var request = new ModernOperatorStatsRequest(account)

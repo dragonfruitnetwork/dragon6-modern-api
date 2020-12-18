@@ -18,6 +18,9 @@ namespace DragonFruit.Six.Api.Modern
         private DateTimeOffset? _startDate;
         private DateTimeOffset? _endDate;
 
+        private PlaylistType? _playlist;
+        private OperatorType? _operatorType;
+
         public override string Path => $"https://r6s-stats.ubisoft.com/v1/current/{RequestType}/{Account.Identifiers.Profile}";
 
         protected ModernStatsRequest(AccountInfo account)
@@ -41,12 +44,20 @@ namespace DragonFruit.Six.Api.Modern
         /// <summary>
         /// The <see cref="PlaylistType"/> to get stats for (as a bitwise flag)
         /// </summary>
-        public PlaylistType Playlist { get; set; } = PlaylistType.Ranked | PlaylistType.Casual | PlaylistType.Unranked;
+        public PlaylistType Playlist
+        {
+            get => _playlist ??= PlaylistType.Ranked | PlaylistType.Casual | PlaylistType.Unranked;
+            set => _playlist = value;
+        }
 
         /// <summary>
         /// Option to filter stats based on whether they were accumulated during an attack or defense round.
         /// </summary>
-        public OperatorType OperatorType { get; set; } = OperatorType.Independent;
+        public OperatorType OperatorType
+        {
+            get => _operatorType ??= OperatorType.Independent;
+            set => _operatorType = value;
+        }
 
         /// <summary>
         /// The start date for the stats
@@ -57,9 +68,9 @@ namespace DragonFruit.Six.Api.Modern
             get => _startDate ??= DateTimeOffset.Now.AddDays(-7);
             set
             {
-                if (DateTimeOffset.UtcNow.AddDays(-120) > value)
+                if (DateTimeOffset.UtcNow.Date.AddDays(-120) > value.Date)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), "Date provided was more than 120 days ago. Stats are only held for upto ~6 months before being removed");
+                    throw new ArgumentOutOfRangeException(nameof(StartDate), "Date provided was more than 120 days ago. Stats are only held for upto 120 days before being removed");
                 }
 
                 _startDate = value;
@@ -69,11 +80,18 @@ namespace DragonFruit.Six.Api.Modern
         /// <summary>
         /// The end date for the stats
         /// </summary>
-        // todo what happens if this is set to the future
         public DateTimeOffset EndDate
         {
             get => _endDate ??= DateTimeOffset.Now;
-            set => _endDate = value;
+            set
+            {
+                if (DateTimeOffset.UtcNow.Date > value.Date)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(EndDate), "Date provided was in the future");
+                }
+
+                _endDate = value;
+            }
         }
 
         [QueryParameter("platform")]
