@@ -25,7 +25,7 @@ namespace DragonFruit.Six.Api.Modern
 
         protected ModernStatsRequest(AccountInfo account)
         {
-            Account = account;
+            Account = account ?? throw new NullReferenceException($"{nameof(account)} must be non-null");
         }
 
         /// <summary>
