@@ -110,7 +110,7 @@ namespace DragonFruit.Six.Api.Modern
         [QueryParameter("teamRole")]
         protected string OperatorTypeNames => OperatorType.HasFlag(OperatorType.Independent)
             // independent = all
-            ? (OperatorType.Attacker | OperatorType.Defender).Expand()
+            ? (OperatorType.Attacker | OperatorType.Defender).Expand() + ",all"
             // here we remove the independent flag then expand
             : (OperatorType & ~OperatorType.Independent).Expand();
     }
