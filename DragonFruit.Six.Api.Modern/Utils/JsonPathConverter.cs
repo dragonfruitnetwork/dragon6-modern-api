@@ -14,7 +14,7 @@ namespace DragonFruit.Six.Api.Modern.Utils
     /// <remarks>
     /// Taken from https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/
     /// </remarks>
-    public class JsonPathConverter : JsonConverter
+    internal class JsonPathConverter : JsonConverter
     {
         public override bool CanWrite => false;
 
