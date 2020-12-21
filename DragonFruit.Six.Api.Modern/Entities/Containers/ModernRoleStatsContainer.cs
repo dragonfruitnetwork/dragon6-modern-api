@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities.Containers
 {
+    [JsonObject(MemberSerialization.OptIn)]
     [JsonConverter(typeof(JsonPathConverter))]
     public class ModernRoleStatsContainer<T>
     {

@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities
 {
-    [Serializable]
     [JsonObject(MemberSerialization.OptIn)]
     public class ModernOperatorStats : IHasKd, IHasWl
     {

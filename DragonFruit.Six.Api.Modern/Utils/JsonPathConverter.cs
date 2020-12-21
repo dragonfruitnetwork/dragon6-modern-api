@@ -58,14 +58,10 @@ namespace DragonFruit.Six.Api.Modern.Utils
             return targetObj;
         }
 
-        public override bool CanConvert(Type objectType)
-        {
-            return true;
-        }
+        public override bool CanConvert(Type objectType) => true;
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
         }
     }
 }

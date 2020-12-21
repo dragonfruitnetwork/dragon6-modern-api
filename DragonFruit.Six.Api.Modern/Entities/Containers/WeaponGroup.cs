@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities.Containers
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class WeaponGroup
     {
         [JsonProperty("weaponType")]

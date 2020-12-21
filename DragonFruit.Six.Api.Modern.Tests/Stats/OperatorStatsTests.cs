@@ -21,7 +21,7 @@ namespace DragonFruit.Six.Api.Modern.Tests.Stats
             var account = GetAccountFor(userId, platform);
             var operatorStats = Client.GetModernOperatorStatsFor(account, startDate: DateTimeOffset.Now.AddDays(-30));
 
-            Assert.IsTrue(operatorStats?.All.AsAny.Any() ?? !expectResults);
+            Assert.IsTrue(operatorStats?.AllModes.AsAny.Any() ?? !expectResults);
         }
     }
 }

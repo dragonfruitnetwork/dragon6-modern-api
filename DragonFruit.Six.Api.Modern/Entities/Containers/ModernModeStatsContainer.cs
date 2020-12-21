@@ -8,13 +8,14 @@ using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities.Containers
 {
+    [JsonObject(MemberSerialization.OptIn)]
     [JsonConverter(typeof(JsonPathConverter))]
     public class ModernModeStatsContainer<T>
     {
         [JsonIgnore]
         public ModernRoleStatsContainer<T> this[PlaylistType type] => type switch
         {
-            PlaylistType.All => All,
+            PlaylistType.All => AllModes,
             PlaylistType.Casual => Casual,
             PlaylistType.Ranked => Ranked,
             PlaylistType.Unranked => Unranked,
@@ -23,7 +24,7 @@ namespace DragonFruit.Six.Api.Modern.Entities.Containers
         };
 
         [JsonProperty("gameModes.all")]
-        public ModernRoleStatsContainer<T> All { get; set; }
+        public ModernRoleStatsContainer<T> AllModes { get; set; }
 
         [JsonProperty("gameModes.casual")]
         public ModernRoleStatsContainer<T> Casual { get; set; }
