@@ -32,27 +32,27 @@ namespace DragonFruit.Six.Api.Modern.Utils
                     continue;
                 }
 
-                var jsonPath = jsonPropertyAttr.PropertyName;
-                var token = jObject.SelectToken(jsonPath);
+                var token = jObject.SelectToken(jsonPropertyAttr.PropertyName);
 
-                if (token != null && token.Type != JTokenType.Null)
+                if (token == null || token.Type == JTokenType.Null)
                 {
-                    var jsonConverterAttr = prop.GetCustomAttributes(true).OfType<JsonConverterAttribute>().FirstOrDefault();
-                    object value;
-
-                    if (jsonConverterAttr == null)
-                    {
-                        serializer.Converters.Clear();
-                        value = token.ToObject(prop.PropertyType, serializer);
-                    }
-                    else
-                    {
-                        value = JsonConvert.DeserializeObject(token.ToString(), prop.PropertyType,
-                            (JsonConverter)Activator.CreateInstance(jsonConverterAttr.ConverterType));
-                    }
-
-                    prop.SetValue(targetObj, value, null);
+                    continue;
                 }
+
+                var jsonConverterAttr = prop.GetCustomAttributes(true).OfType<JsonConverterAttribute>().FirstOrDefault();
+                object value;
+
+                if (jsonConverterAttr == null)
+                {
+                    serializer.Converters.Clear();
+                    value = token.ToObject(prop.PropertyType, serializer);
+                }
+                else
+                {
+                    value = JsonConvert.DeserializeObject(token.ToString(), prop.PropertyType, (JsonConverter)Activator.CreateInstance(jsonConverterAttr.ConverterType));
+                }
+
+                prop.SetValue(targetObj, value, null);
             }
 
             return targetObj;
