@@ -1,11 +1,7 @@
 ﻿// Dragon6 API Copyright 2020 DragonFruit Network <inbox@dragonfruit.network>
 // Licensed under Apache-2. Please refer to the LICENSE file for more info
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using DragonFruit.Six.Api.Modern.Entities;
-using DragonFruit.Six.Api.Modern.Enums;
+using DragonFruit.Six.Api.Modern.Entities.Containers;
 using Newtonsoft.Json.Linq;
 
 namespace DragonFruit.Six.Api.Modern.Utils
@@ -15,26 +11,10 @@ namespace DragonFruit.Six.Api.Modern.Utils
         /// <summary>
         /// Abstracts a ubisoft stats response to present the data required
         /// </summary>
-        public static Dictionary<PlaylistType, ModernStatsContainer<T>> ProcessData<T>(this JObject source, ModernStatsRequest request, Func<JObject, ModernStatsContainer<T>> customProcessor = null)
+        public static ModernModeStatsContainer<T> ProcessData<T>(this JObject source, ModernStatsRequest request, ModernDragon6Client client)
         {
-            var data = source?["platforms"]?[request.Account.Platform.ModernName()]?["gameModes"];
-
-            if (data == null)
-            {
-                return null;
-            }
-
-            var results = new Dictionary<PlaylistType, ModernStatsContainer<T>>(4);
-
-            foreach (var mode in Enum.GetValues(typeof(PlaylistType)).Cast<PlaylistType>())
-            {
-                if (data[mode.ToString().ToLower()]?["teamRoles"] is JObject playlistData)
-                {
-                    results.Add(mode, customProcessor != null ? customProcessor(playlistData) : playlistData.ToObject<ModernStatsContainer<T>>());
-                }
-            }
-
-            return results;
+            var data = source?["platforms"]?[request.Account.Platform.ModernName()];
+            return data?.ToObject<ModernModeStatsContainer<T>>();
         }
     }
 }

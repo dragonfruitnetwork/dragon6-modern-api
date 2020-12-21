@@ -1,0 +1,32 @@
+﻿// Dragon6 API Copyright 2020 DragonFruit Network <inbox@dragonfruit.network>
+// Licensed under Apache-2. Please refer to the LICENSE file for more info
+
+using System;
+using DragonFruit.Six.API.Enums;
+using DragonFruit.Six.Api.Modern.Utils;
+using Newtonsoft.Json;
+
+namespace DragonFruit.Six.Api.Modern.Entities.Containers
+{
+    [JsonConverter(typeof(JsonPathConverter))]
+    public class ModernRoleStatsContainer<T>
+    {
+        public T this[OperatorType type] => type switch
+        {
+            OperatorType.Independent => AsAny,
+            OperatorType.Attacker => AsAttacker,
+            OperatorType.Defender => AsDefender,
+
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
+
+        [JsonProperty("teamRoles.all")]
+        public T AsAny { get; set; }
+
+        [JsonProperty("teamRoles.attacker")]
+        public T AsAttacker { get; set; }
+
+        [JsonProperty("teamRoles.defender")]
+        public T AsDefender { get; set; }
+    }
+}

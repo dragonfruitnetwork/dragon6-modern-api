@@ -2,22 +2,18 @@
 // Licensed under Apache-2. Please refer to the LICENSE file for more info
 
 using System.Collections.Generic;
+using DragonFruit.Six.Api.Modern.Utils;
 using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities.Containers
 {
+    [JsonConverter(typeof(JsonPathConverter))]
     public class WeaponSlot
     {
-        [JsonProperty("primaryWeapons")]
-        public WeaponSlotInfo Primary { get; set; }
+        [JsonProperty("weaponSlots.primaryWeapons.weaponTypes")]
+        public IEnumerable<WeaponGroup> Primary { get; set; }
 
-        [JsonProperty("secondaryWeapons")]
-        public WeaponSlotInfo Secondary { get; set; }
-    }
-
-    public class WeaponSlotInfo
-    {
-        [JsonProperty("weaponTypes")]
-        public IEnumerable<WeaponGroup> Weapons { get; set; }
+        [JsonProperty("weaponSlots.secondaryWeapons.weaponTypes")]
+        public IEnumerable<WeaponGroup> Secondary { get; set; }
     }
 }
