@@ -3,7 +3,7 @@
 
 namespace DragonFruit.Six.Api.Modern.Entities
 {
-    public class ModernOperatorStats : ModernStatsBase
+    public class ModernMapStats : ModernStatsBase
     {
     }
 }

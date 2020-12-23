@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace DragonFruit.Six.Api.Modern.Entities
+namespace DragonFruit.Six.Api.Modern.Entities.Containers
 {
-    public class ModernStatsPeriod<T>
+    public class ModernStatsTrendPeriod<T>
     {
         private readonly string _dateRange;
 
         private DateTime? _start, _end;
         private IEnumerable<string> _periods;
 
-        public ModernStatsPeriod(string dateRange, T value)
+        public ModernStatsTrendPeriod(string dateRange, T value)
         {
             _dateRange = dateRange;
             Value = value;
@@ -24,7 +24,6 @@ namespace DragonFruit.Six.Api.Modern.Entities
         public T Value { get; set; }
 
         public DateTime Start => _start ??= ParsePeriodDate(Periods.First());
-
         public DateTime End => _end ??= ParsePeriodDate(Periods.Last());
 
         private IEnumerable<string> Periods => _periods ??= _dateRange.Split(':');
