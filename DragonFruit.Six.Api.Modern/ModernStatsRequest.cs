@@ -22,12 +22,17 @@ namespace DragonFruit.Six.Api.Modern
         private PlaylistType? _playlist;
         private OperatorType? _operatorType;
 
-        public override string Path => $"https://r6s-stats.ubisoft.com/v1/current/{RequestType}/{Account.Identifiers.Profile}";
+        public override string Path => $"https://r6s-stats.ubisoft.com/v1/{RequestCategory}/{RequestType}/{Account.Identifiers.Profile}";
 
         protected ModernStatsRequest(AccountInfo account)
         {
             Account = account ?? throw new NullReferenceException($"{nameof(account)} must be non-null");
         }
+
+        /// <summary>
+        /// The category the request fits in (i.e. current, seasonal, narrative, etc.)
+        /// </summary>
+        protected virtual string RequestCategory => "current";
 
         /// <summary>
         /// The type of request (general, operators, weapons, etc.)
@@ -54,7 +59,7 @@ namespace DragonFruit.Six.Api.Modern
         /// <summary>
         /// Option to filter stats based on whether they were accumulated during an attack or defense round.
         /// </summary>
-        public OperatorType OperatorType
+        public virtual OperatorType OperatorType
         {
             get => _operatorType ??= OperatorType.Independent;
             set => _operatorType = value;
@@ -64,7 +69,7 @@ namespace DragonFruit.Six.Api.Modern
         /// The start date for the stats
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">The date provided was more than 120 days ago</exception>
-        public DateTimeOffset StartDate
+        public virtual DateTimeOffset StartDate
         {
             get => _startDate ??= DateTimeOffset.Now.AddDays(-DefaultStartWindow);
             set
@@ -81,7 +86,7 @@ namespace DragonFruit.Six.Api.Modern
         /// <summary>
         /// The end date for the stats
         /// </summary>
-        public DateTimeOffset EndDate
+        public virtual DateTimeOffset EndDate
         {
             get => _endDate ??= DateTimeOffset.Now;
             set
@@ -102,13 +107,13 @@ namespace DragonFruit.Six.Api.Modern
         protected string PlaylistNames => Playlist.Expand();
 
         [QueryParameter("startDate")]
-        protected string FormattedStartDate => StartDate.UtcDateTime.ToString(DateTimeFormat);
+        protected virtual string FormattedStartDate => StartDate.UtcDateTime.ToString(DateTimeFormat);
 
         [QueryParameter("endDate")]
-        protected string FormattedEndDate => EndDate.UtcDateTime.ToString(DateTimeFormat);
+        protected virtual string FormattedEndDate => EndDate.UtcDateTime.ToString(DateTimeFormat);
 
         [QueryParameter("teamRole")]
-        protected string OperatorTypeNames => OperatorType.HasFlag(OperatorType.Independent)
+        protected virtual string OperatorTypeNames => OperatorType.HasFlag(OperatorType.Independent)
             // independent = all
             ? (OperatorType.Attacker | OperatorType.Defender).Expand() + ",all"
             // here we remove the independent flag then expand

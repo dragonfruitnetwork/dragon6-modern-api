@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace DragonFruit.Six.Api.Modern.Utils
 {
@@ -20,8 +21,9 @@ namespace DragonFruit.Six.Api.Modern.Utils
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            var contract = serializer.ContractResolver.ResolveContract(objectType) as JsonObjectContract;
+            var targetObj = contract?.DefaultCreator?.Invoke() ?? Activator.CreateInstance(objectType);
             var jObject = JObject.Load(reader);
-            var targetObj = Activator.CreateInstance(objectType);
 
             foreach (var prop in objectType.GetProperties().Where(p => p.CanRead && p.CanWrite))
             {
@@ -53,6 +55,14 @@ namespace DragonFruit.Six.Api.Modern.Utils
                 }
 
                 prop.SetValue(targetObj, value, null);
+            }
+
+            if (contract?.OnDeserializedCallbacks != null)
+            {
+                foreach (var callback in contract.OnDeserializedCallbacks)
+                {
+                    callback.Invoke(targetObj, serializer.Context);
+                }
             }
 
             return targetObj;
