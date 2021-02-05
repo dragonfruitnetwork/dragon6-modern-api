@@ -24,14 +24,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\src\icon.png">
+        <None Include="..\build\icon.png">
             <Pack>true</Pack>
             <PackagePath>.</PackagePath>
         </None>
     </ItemGroup>
     
     <ItemGroup>
-      <PackageReference Include="Dragon6.API" Version="2020.1217.25" />
+      <PackageReference Include="Dragon6.API" Version="2021.128.27" />
     </ItemGroup>
 
 </Project>

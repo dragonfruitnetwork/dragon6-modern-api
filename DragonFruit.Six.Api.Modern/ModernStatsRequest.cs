@@ -3,9 +3,9 @@
 
 using System;
 using DragonFruit.Common.Data.Parameters;
-using DragonFruit.Six.API.Data;
-using DragonFruit.Six.API.Data.Requests.Base;
-using DragonFruit.Six.API.Enums;
+using DragonFruit.Six.Api.Entities;
+using DragonFruit.Six.Api.Requests.Base;
+using DragonFruit.Six.Api.Enums;
 using DragonFruit.Six.Api.Modern.Enums;
 using DragonFruit.Six.Api.Modern.Utils;
 
@@ -86,6 +86,7 @@ namespace DragonFruit.Six.Api.Modern
         /// <summary>
         /// The end date for the stats
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">The date provided is in the future</exception>
         public virtual DateTimeOffset EndDate
         {
             get => _endDate ??= DateTimeOffset.Now;

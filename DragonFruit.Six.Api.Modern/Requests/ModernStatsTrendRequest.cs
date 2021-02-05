@@ -3,7 +3,7 @@
 
 using System;
 using DragonFruit.Common.Data.Parameters;
-using DragonFruit.Six.API.Data;
+using DragonFruit.Six.Api.Entities;
 using DragonFruit.Six.Api.Modern.Enums;
 
 namespace DragonFruit.Six.Api.Modern.Requests

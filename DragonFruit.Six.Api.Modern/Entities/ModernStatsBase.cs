@@ -3,7 +3,7 @@
 
 using System;
 using DragonFruit.Six.Api.Modern.Utils;
-using DragonFruit.Six.API.Utils;
+using DragonFruit.Six.Api.Utils;
 using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities

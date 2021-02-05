@@ -2,9 +2,9 @@
 // Licensed under Apache-2. Please refer to the LICENSE file for more info
 
 using DragonFruit.Common.Data.Extensions;
-using DragonFruit.Six.API.Data.Tokens;
-using DragonFruit.Six.API.Developer;
-using DragonFruit.Six.API.Developer.Auth;
+using DragonFruit.Six.Api.Services.Developer;
+using DragonFruit.Six.Api.Services.Developer.Auth;
+using DragonFruit.Six.Api.Tokens;
 
 namespace DragonFruit.Six.Api.Modern.Developer
 {

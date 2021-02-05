@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using DragonFruit.Six.API.Data;
-using DragonFruit.Six.API.Data.Extensions;
-using DragonFruit.Six.API.Enums;
+using DragonFruit.Six.Api.Entities;
+using DragonFruit.Six.Api.Enums;
+using DragonFruit.Six.Api.Extensions;
 using DragonFruit.Six.Api.Modern.Developer;
 
 namespace DragonFruit.Six.Api.Modern.Tests

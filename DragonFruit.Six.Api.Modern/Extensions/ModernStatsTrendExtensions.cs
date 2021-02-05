@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using DragonFruit.Six.API.Data;
-using DragonFruit.Six.API.Enums;
+using DragonFruit.Six.Api.Entities;
+using DragonFruit.Six.Api.Enums;
 using DragonFruit.Six.Api.Modern.Entities;
 using DragonFruit.Six.Api.Modern.Entities.Containers;
 using DragonFruit.Six.Api.Modern.Enums;

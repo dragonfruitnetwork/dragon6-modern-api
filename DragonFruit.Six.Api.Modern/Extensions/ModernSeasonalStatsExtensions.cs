@@ -2,7 +2,7 @@
 // Licensed under Apache-2. Please refer to the LICENSE file for more info
 
 using System.Collections.Generic;
-using DragonFruit.Six.API.Data;
+using DragonFruit.Six.Api.Entities;
 using DragonFruit.Six.Api.Modern.Entities;
 using DragonFruit.Six.Api.Modern.Entities.Containers;
 using DragonFruit.Six.Api.Modern.Enums;

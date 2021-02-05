@@ -4,8 +4,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
-using DragonFruit.Six.API;
-using DragonFruit.Six.API.Data.Tokens;
+using DragonFruit.Six.Api.Tokens;
 
 namespace DragonFruit.Six.Api.Modern
 {
@@ -31,14 +30,11 @@ namespace DragonFruit.Six.Api.Modern
             Headers["Expiration"] = currentToken.Expiry.UtcDateTime.ToString("O");
         }
 
-        protected override T ValidateAndProcess<T>(HttpResponseMessage response, HttpRequestMessage request)
+        protected override T ValidateAndProcess<T>(HttpResponseMessage response, HttpRequestMessage request) => response.StatusCode switch
         {
-            return response.StatusCode switch
-            {
-                HttpStatusCode.NoContent => default,
+            HttpStatusCode.NoContent => default,
 
-                _ => base.ValidateAndProcess<T>(response, request)
-            };
-        }
+            _ => base.ValidateAndProcess<T>(response, request)
+        };
     }
 }
