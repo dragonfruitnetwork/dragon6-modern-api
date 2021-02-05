@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace DragonFruit.Six.Api.Modern.Entities.Containers
+namespace DragonFruit.Six.Api.Modern.Containers
 {
     public class ModernStatsTrendPeriod<T>
     {

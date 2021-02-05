@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using DragonFruit.Six.Api.Modern.Entities.Containers;
+using DragonFruit.Six.Api.Modern.Containers;
 using Newtonsoft.Json;
 
 namespace DragonFruit.Six.Api.Modern.Entities

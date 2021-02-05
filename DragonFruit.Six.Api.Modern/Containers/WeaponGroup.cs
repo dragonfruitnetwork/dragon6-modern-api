@@ -2,9 +2,10 @@
 // Licensed under Apache-2. Please refer to the LICENSE file for more info
 
 using System.Collections.Generic;
+using DragonFruit.Six.Api.Modern.Entities;
 using Newtonsoft.Json;
 
-namespace DragonFruit.Six.Api.Modern.Entities.Containers
+namespace DragonFruit.Six.Api.Modern.Containers
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class WeaponGroup

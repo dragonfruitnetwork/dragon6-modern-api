@@ -6,7 +6,7 @@ using System.Linq;
 using DragonFruit.Six.Api.Entities;
 using DragonFruit.Six.Api.Enums;
 using DragonFruit.Six.Api.Extensions;
-using DragonFruit.Six.Api.Modern.Developer;
+using DragonFruit.Six.Api.Modern.Services.Developer;
 
 namespace DragonFruit.Six.Api.Modern.Tests
 {

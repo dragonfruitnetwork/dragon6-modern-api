@@ -33,5 +33,9 @@
     <ItemGroup>
       <PackageReference Include="Dragon6.API" Version="2021.128.27" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Services" />
+    </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ using DragonFruit.Six.Api.Services.Developer;
 using DragonFruit.Six.Api.Services.Developer.Auth;
 using DragonFruit.Six.Api.Tokens;
 
-namespace DragonFruit.Six.Api.Modern.Developer
+namespace DragonFruit.Six.Api.Modern.Services.Developer
 {
     /// <summary>
     /// Class lifted from <see cref="Dragon6DeveloperClient"/>
