@@ -31,7 +31,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <PackageReference Include="Dragon6.API" Version="2021.128.27" />
+      <PackageReference Include="Dragon6.API" Version="2021.326.30" />
     </ItemGroup>
     
     <ItemGroup>
