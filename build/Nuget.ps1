@@ -1,20 +1,20 @@
 param ([string] $ApiKey, [string]$Suffix = "")
-
 # versioning info
 $VERSION = "$(Get-Date -UFormat "%Y.%m%d").$($env:GITHUB_RUN_NUMBER)$($Suffix)"
 $WORKINGDIR = Get-Location
+$TARGET = "DragonFruit.Six.Api.Modern"
 
 # nuget restore
 nuget locales all -clear
 nuget restore
 
 # build files
-Write-Output "Building DragonFruit.Six.API Version $VERSION"
+Write-Output "Building $TARGET Version $VERSION"
 dotnet build -c Release /p:PackageVersion=$VERSION
 
 # pack into nuget files with the suffix if we have one
-Write-Output "Publishing DragonFruit.Six.API Version $VERSION"
-dotnet pack "..\DragonFruit.Six.API\DragonFruit.Six.API.csproj" -o $WORKINGDIR -c Release -p:PackageVersion=$VERSION -p:Version=$VERSION
+Write-Output "Publishing $TARGET Version $VERSION"
+dotnet pack ".\$TARGET\$TARGET.csproj" -o $WORKINGDIR -c Release -p:PackageVersion=$VERSION -p:Version=$VERSION
 
 # recursively push all nuget files created
 Get-ChildItem -Path $WORKINGDIR -Filter *.nupkg -Recurse -File -Name | ForEach-Object {
