@@ -4,21 +4,19 @@ on: [ pull_request ]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Install .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '5.0.x'
+      - name: NuGet Restore
+        run: |
+          nuget locale all -clear
+          nuget restore
 
       - name: Build
-        run: |
-          dotnet restore
-          dotnet build -c Release
+        run: dotnet build -c Release
 
       - name: Unit Tests
         run: dotnet test
