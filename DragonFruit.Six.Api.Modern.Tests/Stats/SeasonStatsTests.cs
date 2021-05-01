@@ -12,18 +12,20 @@ namespace DragonFruit.Six.Api.Modern.Tests.Stats
     [TestFixture]
     public class SeasonStatsTests : Dragon6ApiTest
     {
-        [TestCase("ab1ff7ae-13e4-4a6a-9b03-317285f8057b", Platform.PC, true)]
-        [TestCase("352655b3-2ff4-4713-9ad5-c10eb080e6f6", Platform.PC, false)]
-        [TestCase("b598e9a9-f817-42fe-b381-45f918e5efa4", Platform.XB1, true)]
-        [TestCase("a5e7c9c4-a225-4d8e-810f-0c529d829a34", Platform.PSN, false)]
-        public void BasicSeasonStatsTest(string userId, Platform platform, bool expectResults)
+        [TestCase("ab1ff7ae-13e4-4a6a-9b03-317285f8057b", Platform.PC, false, true)]
+        [TestCase("352655b3-2ff4-4713-9ad5-c10eb080e6f6", Platform.PC, true, false)]
+        [TestCase("b598e9a9-f817-42fe-b381-45f918e5efa4", Platform.XB1, true, true)]
+        [TestCase("a5e7c9c4-a225-4d8e-810f-0c529d829a34", Platform.PSN, true, false)]
+        public void BasicSeasonStatsTest(string userId, Platform platform, bool casual, bool expectResults)
         {
             var account = GetAccountFor(userId, platform);
             var seasonStats = Client.GetModernSeasonStatsFor(account);
 
             try
             {
-                var latestSeason = seasonStats!.Casual.AsAny.Last();
+                var selector = casual ? seasonStats.Casual : seasonStats.Ranked;
+                var latestSeason = selector.AsAny.Last();
+
                 Assert.IsTrue(latestSeason.RoundsPlayed > 0 && latestSeason.Name != "summary");
             }
             catch (NullReferenceException) when (!expectResults)
